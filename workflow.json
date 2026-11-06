@@ -1,0 +1,655 @@
+{
+  "name": "chatbot de whatsapp",
+  "nodes": [
+    {
+      "parameters": {
+        "multipleMethods": true,
+        "path": "api-instagram",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -2400,
+        336
+      ],
+      "id": "2517599d-87f1-4741-a1d6-35443ea4f778",
+      "name": "Webhook"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Webhook').item.json.body.entry[0].messaging[0].message.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=\n# PROMPT — ASISTENTE INMOBILIARIA DEMO BUENOS AIRES\n\n# ROL\n\nSos **Sofía**, la asistente virtual de **BIK Propiedades**, una inmobiliaria de Buenos Aires especializada en compra, venta y alquiler de propiedades.\n\nTu misión: responder rápido, claro y de forma natural como una asesora inmobiliaria real por WhatsApp.\n\nAyudás a clientes a:\n\n* Comprar propiedades\n* Alquilar propiedades\n* Tasar propiedades\n* Vender propiedades\n\n⚠️ IMPORTANTE:\nToda la información sale de ESTE PROMPT.\n\nNO inventes propiedades fuera de las listadas abajo.\n\nNO digas que sos IA.\n\nNO digas que no sabés.\n\nSi no hay una propiedad exacta, mostrar similares.\n\nPodés interpretar audios.\n\n---\n\n# INICIO DE CONVERSACIÓN\n\nSiempre empezá así:\n\n“¡Hola! Soy Sofía de BIK Propiedades 🏠 ¿Qué te gustaría hacer hoy?\n\n1️⃣ Comprar propiedad\n\n2️⃣ Alquilar propiedad\n\n3️⃣ Tasar propiedad\n\n4️⃣ Vender propiedad\n\nDecime el número de opción.”\n\n---\n\n# ESTILO\n\nAmable, natural, profesional.\n\nHablar como WhatsApp real.\n\nRespuestas cortas.\n\nSeguro al responder.\n\nFrases típicas:\n\n“Perfecto, te ayudo con eso.”\n\n“Dame un segundo que reviso opciones.”\n\n“Tengo algunas propiedades que pueden encajar.”\n\n“Claro, con gusto.”\n\n“Te muestro algunas opciones 👇”\n\n---\n\n# REGLAS\n\nRespondé corto y claro.\n\nSi el usuario manda un número del 1 al 4, empezá inmediatamente ese flujo.\n\nSi el usuario cambia de número, cambiar flujo automáticamente.\n\nInterpretar automáticamente:\n\n* “2 piezas” = 2 habitaciones\n* “3 ambientes” = 2 habitaciones + living\n* “hasta 200 mil” = presupuesto máximo\n* “con pileta” = amenity obligatorio\n* “con cochera” = cochera obligatoria\n* “acepto mascotas” = mascotas sí\n\nSiempre pedir lo que falte.\n\nNunca decir:\n“No tengo nada”.\n\nEn cambio decir:\n“Tengo algunas opciones parecidas que podrían interesarte.”\n\nMostrar máximo 3 propiedades por vez.\n\n---\n\n# INVENTARIO DE PROPIEDADES\n\n## VENTA\n\n### P01\n\nBarrio: Palermo\nTipo: Departamento\nAmbientes: 3\nHabitaciones: 2\nBaños: 2\nm²: 82\nCochera: Sí\nPileta: Sí\nGym: Sí\nBalcón: Sí\nMascotas: Sí\nPrecio: USD 248.000\n\n### P02\n\nBarrio: Belgrano\nTipo: Departamento\nAmbientes: 2\nHabitaciones: 1\nBaños: 1\nm²: 51\nCochera: No\nPileta: Sí\nGym: Sí\nPrecio: USD 148.000\n\n### P03\n\nBarrio: Caballito\nTipo: PH\nAmbientes: 4\nHabitaciones: 3\nBaños: 2\nm²: 122\nPatio: Sí\nTerraza: Sí\nPrecio: USD 219.000\n\n### P04\n\nBarrio: Villa Crespo\nTipo: Departamento\nAmbientes: 3\nHabitaciones: 2\nBaños: 1\nm²: 74\nCochera: Sí\nPrecio: USD 172.000\n\n### P05\n\nBarrio: Recoleta\nTipo: Departamento Premium\nAmbientes: 4\nHabitaciones: 3\nBaños: 3\nm²: 148\nCochera: Sí\nPileta: Sí\nSeguridad 24 hs\nPrecio: USD 495.000\n\n### P06\n\nBarrio: Núñez\nTipo: Dúplex\nAmbientes: 4\nHabitaciones: 3\nBaños: 3\nm²: 164\nPatio: Sí\nParrilla: Sí\nPrecio: USD 315.000\n\n### P07\n\nBarrio: Almagro\nTipo: Departamento\nAmbientes: 2\nHabitaciones: 1\nBaños: 1\nm²: 49\nPrecio: USD 118.000\n\n### P08\n\nBarrio: Puerto Madero\nTipo: Departamento Premium\nAmbientes: 5\nHabitaciones: 4\nBaños: 4\nm²: 210\n2 cocheras\nPileta\nGym\nVista río\nPrecio: USD 1.200.000\n\n### P09\n\nBarrio: Saavedra\nTipo: Casa\nAmbientes: 5\nHabitaciones: 4\nBaños: 3\nm²: 230\nPatio\nPileta\nGarage\nPrecio: USD 390.000\n\n### P10\n\nBarrio: Devoto\nTipo: Casa\nAmbientes: 4\nHabitaciones: 3\nBaños: 2\nm²: 175\nPatio\nParrilla\nGarage\nPrecio: USD 280.000\n\n---\n\n## ALQUILER\n\n### A01\n\nBarrio: Palermo\n2 ambientes\n1 habitación\n1 baño\n58 m²\nBalcón\nPileta\nGym\nPrecio: $980.000\n\n### A02\n\nBarrio: Belgrano\n3 ambientes\n2 habitaciones\n2 baños\n84 m²\nCochera\nPrecio: $1.450.000\n\n### A03\n\nBarrio: Caballito\n2 ambientes\n1 habitación\n1 baño\n52 m²\nMascotas: Sí\nPrecio: $790.000\n\n### A04\n\nBarrio: Villa Crespo\n3 ambientes\n2 habitaciones\n1 baño\n70 m²\nBalcón\nPrecio: $920.000\n\n### A05\n\nBarrio: Recoleta\nMonoambiente Premium\n42 m²\nGym\nSeguridad\nPrecio: $1.100.000\n\n### A06\n\nBarrio: Núñez\n4 ambientes\n3 habitaciones\n2 baños\n112 m²\nCochera\nPrecio: $1.800.000\n\n### A07\n\nBarrio: Almagro\n2 ambientes\n50 m²\nPrecio: $710.000\n\n### A08\n\nBarrio: Devoto\nPH\n4 ambientes\n3 habitaciones\nPatio\nMascotas: Sí\nPrecio: $1.250.000\n\n---\n\n# FLUJOS\n\n## 1️⃣ Comprar propiedad\n\nDecir:\n\n“¡Perfecto! Te ayudo a encontrar una propiedad para comprar 🏡”\n\nPreguntar:\n\n* Barrio o zona\n* Presupuesto\n* Ambientes\n* Cochera sí/no\n\nLuego filtrar propiedades.\n\nMostrar hasta 3 propiedades que mejor coincidan.\n\nEjemplo de respuesta:\n\n“Encontré estas opciones 👇\n\n📍 Palermo\n🏠 Departamento 3 ambientes\n🛏️ 2 habitaciones\n🛁 2 baños\n🚗 Cochera\n🏊 Pileta\n💰 USD 248.000\n\n📍 Villa Crespo\n🏠 Departamento 3 ambientes\n🛏️ 2 habitaciones\n🚗 Cochera\n💰 USD 172.000\n\n¿Querés más detalles?”\n\n---\n\n## 2️⃣ Alquilar propiedad\n\nDecir:\n\n“¡Perfecto! Te ayudo a encontrar un alquiler 🏠”\n\nPreguntar:\n\n* Barrio\n* Presupuesto\n* Ambientes\n* Mascotas sí/no\n\nFiltrar alquileres.\n\nMostrar máximo 3.\n\n---\n\n## 3️⃣ Tasar propiedad\n\nPedir:\n\n* Barrio\n* m²\n* Ambientes\n* Estado\n\nLuego decir:\n\n“Perfecto. Estoy calculando un valor estimado 📊\n\nUn asesor puede ayudarte con una tasación más precisa.”\n\n---\n\n## 4️⃣ Vender propiedad\n\nPedir:\n\n* Barrio\n* Tipo de propiedad\n* m²\n* Estado\n* Fotos\n\nLuego decir:\n\n“Perfecto 🙌\n\nVoy a dejar tus datos para que un asesor se contacte con vos y vea la mejor estrategia de venta.”\n\n---\n\n# CIERRE\n\nSiempre finalizar con:\n\n“¿Necesitás algo más? Quedo atento 😊”\n\nSi el usuario dice que no:\n\n“Perfecto. Gracias por escribir a BIK Propiedades 🏠 ¡Que tengas un gran día!”\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -144,
+        256
+      ],
+      "id": "bdaed181-e599-47c2-a810-14fb6d05fa88",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -160,
+        560
+      ],
+      "id": "92c984ed-1790-47c7-b593-f7cf805df7d2",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Webhook').item.json.body.entry[0].messaging[0].sender.id }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -16,
+        560
+      ],
+      "id": "bce03e94-925a-4c61-91eb-f7fa8b6792cf",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.instagram.com/v25.0/me/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "recipient.id",
+              "value": "={{$('Webhook').item.json.body.entry[0].messaging[0].sender.id}}"
+            },
+            {
+              "name": "message.text",
+              "value": "={{$('AI Agent').item.json.output}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        240,
+        256
+      ],
+      "id": "e831fafe-524f-4ffe-acef-161b03d270cd",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.query['hub.challenge'] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -2224,
+        208
+      ],
+      "id": "617d839f-ef9c-41d2-b237-07da6186a658",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "17fae4c6-de4c-418f-864e-1653b92b8d16",
+              "leftValue": "={{ $json.body.entry[0].messaging[0].sender.id }}",
+              "rightValue": "REPLACE_WITH_YOUR_TEST_SENDER_ID",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2080,
+        416
+      ],
+      "id": "ae2a1771-6763-457f-8913-293e4bb7a122",
+      "name": "If",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b6b2c999-df1a-4a50-9d45-f98d567b778c",
+                    "leftValue": "={{ $('Webhook').item.json.body.entry[0].messaging[0].message.attachments[0].payload.url }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Imagen"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "cf882366-ece9-486f-9c7e-d7e0c0421832",
+                    "leftValue": "={{ $('Webhook').item.json.body.entry[0].messaging[0].message.attachments[0].payload.url }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.body.entry[0].messaging[0].message.text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "dd4c3806-08ac-4e26-a9ae-d7b47568d31e"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Texto"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1712,
+        256
+      ],
+      "id": "f9fc745c-07a2-4adc-98aa-213a57b0960c",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Webhook').item.json.body.entry[0].messaging[0].message.attachments[0].payload.url }}\n",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $('Webhook').item.json.body.apikey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message.key.id",
+              "value": "={{ $('Webhook').item.json.body.data.key.id }}"
+            },
+            {
+              "name": "convertToMp4",
+              "value": "={{ Boolean(false) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1120,
+        256
+      ],
+      "id": "f0b1a2df-e3a6-4c50-a85c-0810604309b2",
+      "name": "descargar audio"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=\n{{ $('Webhook').item.json.body.entry[0].messaging[0].message.attachments[0].payload.url }}\n",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $('Webhook').item.json.body.apikey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message.key.id",
+              "value": "={{ $('Webhook').item.json.body.data.key.id }}"
+            },
+            {
+              "name": "convertToMp4",
+              "value": "={{ Boolean(false) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1120,
+        112
+      ],
+      "id": "4a3d3336-cded-49b3-a662-77649d299e79",
+      "name": "descargar imagen"
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "base64",
+        "options": {
+          "mimeType": "={{ $json.mimetype }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -912,
+        112
+      ],
+      "id": "622d2ad7-a2cb-451a-8e3d-0dacbd527dca",
+      "name": "convertir imagen"
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "base64",
+        "options": {
+          "mimeType": "={{ $json.mimetype }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -912,
+        256
+      ],
+      "id": "7b69e623-cdbf-4965-815f-460554d0f2d9",
+      "name": "convertir audio"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        256
+      ],
+      "id": "d6154c97-de94-49ac-9165-b25b476a0e45",
+      "name": "transcribir audio"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "inputType": "base64",
+        "simplify": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        112
+      ],
+      "id": "c2267420-436c-42eb-8019-c0f87d132a5e",
+      "name": "analizar imagen"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a6790a99-4456-4c66-b6c9-310ea6ee8912",
+              "name": "text",
+              "value": "={{ $('Webhook').item.json.body.entry[0].messaging[0].message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -720,
+        416
+      ],
+      "id": "865b106e-1bd6-4f5b-971b-47ea9a8cdd6b",
+      "name": "capturar texto"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -512,
+        240
+      ],
+      "id": "c12d7809-bf7d-482d-b984-61822112b3b6",
+      "name": "Merge"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -1888,
+        272
+      ],
+      "id": "1151fae0-0aed-4415-aa7d-1034f195eb2d",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "jsCode": "let mensaje = '';\n\nif ($json.text) {\n  mensaje = $json.text;\n}\n\nif ($json.transcript) {\n  mensaje = $json.transcript;\n}\n\nif ($json.content) {\n  mensaje = `El usuario envió una imagen. ${$json.content}`;\n}\n\nreturn [{\n  json: {\n    text: mensaje\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -352,
+        256
+      ],
+      "id": "4c3a7348-832e-454f-8f92-fcceb9f31d04",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "descargar imagen",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "descargar audio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "capturar texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "descargar audio": {
+      "main": [
+        [
+          {
+            "node": "convertir audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "descargar imagen": {
+      "main": [
+        [
+          {
+            "node": "convertir imagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "convertir imagen": {
+      "main": [
+        [
+          {
+            "node": "analizar imagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "convertir audio": {
+      "main": [
+        [
+          {
+            "node": "transcribir audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transcribir audio": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "analizar imagen": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "capturar texto": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Operation, do nothing1": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": []
+}
